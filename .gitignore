@@ -1,0 +1,61 @@
+# IDE / editor local state
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# JetBrains project-local caches
+shelf/
+workspace.xml
+httpRequests/
+dataSources/
+dataSources.local.xml
+
+# Local assistant / tool state
+.claude/
+.codex/
+.codex
+.cache/
+
+# CMake build output
+build/
+cmake-build-*/
+*/build/
+*/cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+Makefile
+cmake_install.cmake
+compile_commands.json
+
+# Compiled binaries and object files
+*.o
+*.obj
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+*.out
+*.d
+lighttalk-ws/lighttalk-ws
+lighttalk-ws/build/lighttalk-ws
+
+# Project-local machine configuration
+.clangd
+.clang-tidy
+.clang-format
+
+# Logs and runtime dumps
+*.log
+*.pid
+core
+core.*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local experiments
+boost-sandbox/

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LightTalk WebSocket Test</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 24px; max-width: 860px; }
+    input, button { font: inherit; padding: 8px 10px; margin: 4px; }
+    #log { height: 360px; overflow: auto; border: 1px solid #ccc; padding: 12px; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h1>LightTalk WebSocket Test</h1>
+  <div>
+    <input id="url" value="ws://localhost:9000/ws" size="28">
+    <input id="room" value="cpp" size="10">
+    <input id="nick" value="akiba" size="10">
+    <button id="connect">Connect</button>
+  </div>
+  <div>
+    <input id="content" value="hello" size="42">
+    <button id="send">Send</button>
+  </div>
+  <pre id="log"></pre>
+
+  <script>
+    let ws;
+    const $ = id => document.getElementById(id);
+    const log = value => {
+      $("log").textContent += `${typeof value === "string" ? value : JSON.stringify(value)}\n`;
+      $("log").scrollTop = $("log").scrollHeight;
+    };
+
+    $("connect").onclick = () => {
+      ws = new WebSocket($("url").value);
+      ws.onopen = () => {
+        log("connected");
+        ws.send(JSON.stringify({
+          type: "join",
+          roomId: $("room").value,
+          nickname: $("nick").value
+        }));
+      };
+      ws.onmessage = event => log(JSON.parse(event.data));
+      ws.onclose = () => log("closed");
+      ws.onerror = () => log("websocket error");
+    };
+
+    $("send").onclick = () => {
+      ws.send(JSON.stringify({
+        type: "chat",
+        roomId: $("room").value,
+        content: $("content").value
+      }));
+    };
+  </script>
+</body>
+</html>
