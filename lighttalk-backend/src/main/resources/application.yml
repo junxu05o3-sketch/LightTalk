@@ -1,0 +1,88 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  mvc:
+    pathmatch:
+        matching-strategy: ant_path_matcher
+
+  application:
+    name: lighttalk-backend
+
+  # 数据源配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/lighttalk?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: root123456
+    # HikariCP 连接池配置
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      idle-timeout: 30000
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      pool-name: LightTalkHikariCP
+
+  # Redis 配置
+  redis:
+    host: localhost
+    port: 6379
+    # password: 123456  # 如有密码请取消注释
+    database: 0
+    timeout: 10000ms
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 0
+
+  # Jackson JSON 配置
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+    serialization:
+      write-dates-as-timestamps: false
+
+# MyBatis Plus 配置
+mybatis-plus:
+  # Mapper XML 文件路径
+  mapper-locations: classpath:mapper/*.xml
+  # 实体类扫描路径
+  type-aliases-package: com.lighttalk.model.entity
+  configuration:
+    # 开启驼峰命名转换
+    map-underscore-to-camel-case: true
+    # 打印 SQL 日志（开发环境开启，生产环境关闭）
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      # 主键策略：自增
+      id-type: auto
+      # 逻辑删除配置
+      logic-delete-field: isDeleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+# JWT 配置
+jwt:
+  # 密钥（生产环境请使用环境变量或配置中心管理）
+  # 注意：密钥长度必须 >= 32 字节（HS256 算法要求）
+  secret: LightTalkJwtSecretKey2024ForHS256AlgorithmMustBeLongEnough
+  # 过期时间（秒）- 默认 24 小时
+  expiration: 86400
+
+# Knife4j 接口文档配置
+knife4j:
+  enable: true
+  setting:
+    language: zh-CN
+
+# 日志配置
+logging:
+  level:
+    com.lighttalk: debug
+    com.lighttalk.mapper: debug
