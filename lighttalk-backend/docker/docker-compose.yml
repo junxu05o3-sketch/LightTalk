@@ -13,7 +13,7 @@ services:
       MYSQL_COLLATION_SERVER: utf8mb4_unicode_ci
       TZ: Asia/Shanghai
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       # 数据持久化
       - mysql_data:/var/lib/mysql
