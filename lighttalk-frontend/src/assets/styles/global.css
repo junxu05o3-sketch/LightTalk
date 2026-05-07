@@ -1,0 +1,64 @@
+:root {
+  --bg-gradient-start: #0f2027;
+  --bg-gradient-mid: #203a43;
+  --bg-gradient-end: #2c5364;
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --text-primary: #e0e0e0;
+  --text-secondary: #9e9e9e;
+  --brand-color: #4facfe;
+  --brand-color-hover: #00f2fe;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-mid), var(--bg-gradient-end));
+  background-attachment: fixed;
+  background-size: cover;
+  color: var(--text-primary);
+  height: 100vh;
+  overflow: hidden;
+}
+
+#app {
+  height: 100vh;
+  width: 100vw;
+}
+
+/* 全局玻璃拟态容器通用类 */
+.glass-container {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 16px;
+}
+
+/* 覆盖 Element Plus 默认样式适配暗黑/玻璃态 */
+.el-input__wrapper {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1) inset !important;
+}
+
+.el-input__inner {
+  color: #fff !important;
+}
+
+.el-button--primary {
+  background: linear-gradient(to right, var(--brand-color), var(--brand-color-hover)) !important;
+  border: none !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.el-button--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4) !important;
+}
